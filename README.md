@@ -1,6 +1,10 @@
 # implicit-hate-detection
 cs685 group project implicit hate detection
 
+Wandb Team: https://wandb.ai/cs685-implicit-hate-detection
+
+
+
 Proposal: (link-to-proposal)
 
 Group members: Simon Andrews, Kimberley Faria, Rishita Golla, Pragya Sarda
