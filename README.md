@@ -14,6 +14,7 @@ Key Reference Paper: https://aclanthology.org/2021.emnlp-main.29.pdf (Presents t
 TODO: (Write short descriptions of (interesting) papers, will be easier to recall as we go through the project)
 
 Imtermediate Fine-tuning:
+**Mohit's lec on Intermediae finetuning: https://www.youtube.com/watch?v=run0nnEBVFU&ab_channel=MohitIyyer**
 Key Paper: https://arxiv.org/pdf/1811.01088.pdf (Presents the concept of STILTS and Intermediate Fine-tuning)
 
 Other Papers (How to choose tasks, analysis of intermediate fine-tuning, what works, might help in selecting the intermediate tasks and running experiments):
