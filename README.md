@@ -65,6 +65,6 @@ Shufan
 
 1. Should we spend time on SVM baselines? might be better to focus on the BERT baselines and what is asked in the proposal. 
 2. Analysis and finetuning approach -> how should we prioritize our experiments?
-3. finetuning approach on twitter text data?  simple LM objective?
+3. finetuning approach on twitter text data?  simple LM objective? (there should be a twitter BERT already out there)
 4. 
 
