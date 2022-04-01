@@ -43,3 +43,25 @@ Possible intermediate tasks (datasets):
 5.  Language Modelling - Sarcastic Text Generation - https://arxiv.org/abs/1911.10401 (A Transformer-based approach to Irony and Sarcasm detection)
 
 
+
+# Proposal Feedback:
+Very interesting and thoughtful proposal. It is also great that the dataset and evaluation bench mark are available. A few minor comments from us:
+
+1. One thing that could be informative and interesting is that you may want to compute and show your existing evaluation metrics (F1, accuracy …) also based on various classes. That may be very interesting for your error analysis too.
+
+2. Depending on the error analysis you made on step 1, you may discover that there might be areas where the model is bad. Then you could potentially fine-tune BERT for that types of dataset before fine-tuning it for the hate speech detection task. For example, maybe it could be helpful to fine-tune BERT on sarcasm / humor detection tasks.
+
+3. BERT has never seen twitter text during pre-training so there might be domain adaptation issues. It might also be interesting to see whether BERT will do better on your hate speech detection task (twitter text) after being fine-tuned on twitter text first.
+
+
+Good luck,
+Shufan
+
+
+# Questions for OH:
+
+1. Should we spend time on SVM baselines? might be better to focus on the BERT baselines and what is asked in the proposal. 
+2. Analysis and finetuning approach -> how should we prioritize our experiments?
+3. finetuning approach on twitter text data?  simple LM objective?
+4. 
+
