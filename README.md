@@ -68,3 +68,13 @@ Shufan
 3. finetuning approach on twitter text data?  simple LM objective? (there should be a twitter BERT already out there)
 4. 
 
+
+### Implicit Hate Dataset Loader:
+
+- Download the dataset from: https://www.dropbox.com/s/24meryhqi1oo0xk/implicit-hate-corpus-nov-2021.zip?dl=0
+- Requirements: pytorch, transformers, pandas
+- Reused helpers.py file from HW1 since we are working with BERT (so same tokenization strategy)
+- dataloader.py has the Pytorch Dataset class definitions
+- main.py is an example script that prints out the dataset values (as is) and the tokenized inputs and preprocessed labels (as integers) (like in HW1)
+- see config.py for dataset specs... for more info, see the readme in the original implicit hate dataset zip downloaded from dropbox
+
