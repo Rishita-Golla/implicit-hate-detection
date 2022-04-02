@@ -2,7 +2,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
-from helpers import tokenize_and_format
+from implicit_hate_dataloader.helpers import tokenize_and_format
 
 STAGE_1_LABELS = {
     'explicit_hate': 0,
