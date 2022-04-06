@@ -1,8 +1,7 @@
 # implicit-hate-detection
 cs685 group project implicit hate detection
 
-Wandb Team: https://wandb.ai/umass-iesl-is/685-cs-project
-
+Wandb Team: https://wandb.ai/umass-iesl-is/685-cs-project || https://wandb.ai/umass-iesl-is/cs685-project/
 
 
 Proposal: (link-to-proposal)
