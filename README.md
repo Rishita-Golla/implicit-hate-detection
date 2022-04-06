@@ -9,6 +9,8 @@ Proposal: (link-to-proposal)
 
 Group members: Simon Andrews, Kimberley Faria, Rishita Golla, Pragya Sarda
 
+Task List: https://github.com/users/kimberley-faria/projects/1/views/1 
+
 Key Reference Paper: https://aclanthology.org/2021.emnlp-main.29.pdf (Presents the Implicit Hate Dataset)
 
 TODO: (Write short descriptions of (interesting) papers, will be easier to recall as we go through the project)
