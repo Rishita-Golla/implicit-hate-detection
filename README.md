@@ -73,5 +73,6 @@ Shufan
     3. **for which class does the model make the most mistakes**
     
 4. finetuning approach on twitter text data?  simple LM objective? (there should be a twitter BERT already out there) - https://huggingface.co/docs/transformers/model_doc/bertweet - **yes can use this pre-trained BERT**
-5. 
+5. evaluate on all hparam settings? or just the best model
+6. not writing model from scratch - is what we are doing sufficient.
 
