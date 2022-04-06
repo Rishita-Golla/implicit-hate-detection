@@ -66,10 +66,9 @@ Shufan
 1. task definition in the paper doesn't match the dataset, can we specify how we are running our baselines in the report and move forward? - **doesn't match, so can establish 2 baselines - implicit-hate vs non-hate (drop the 1000 explicit hate) and hate vs non-hate (combine the 2 categories). Need to check overlap between stage 1 and stage 2 annotations**
 3. Should we spend time on SVM baselines? might be better to focus on the BERT baselines and what is asked in the proposal. - **yup, can just concentrate on BERT**
 4. Analysis and finetuning approach -> how should we prioritize our experiments?**
-
-        5. **for twitter data issue - analyze examples for mistakes - will mostly be the ones with certain linguistic details in social media text (acronyms, hashtags, etc)** 
-        6. **for the 6-way classification task => directions for negative flips -> identify pairs , compute the confusion matrix (# of examples from 1 class to another, which are overlapping), which label pair gets wrongly classified the most**
-        7. **for which class does the model make the most mistakes**
+    5. **for twitter data issue - analyze examples for mistakes - will mostly be the ones with certain linguistic details in social media text (acronyms, hashtags, etc)** 
+    6. **for the 6-way classification task => directions for negative flips -> identify pairs , compute the confusion matrix (# of examples from 1 class to another, which are overlapping), which label pair gets wrongly classified the most**
+    7. **for which class does the model make the most mistakes**
 6. finetuning approach on twitter text data?  simple LM objective? (there should be a twitter BERT already out there) - https://huggingface.co/docs/transformers/model_doc/bertweet - **yes can use this pre-trained BERT**
 7. 
 
