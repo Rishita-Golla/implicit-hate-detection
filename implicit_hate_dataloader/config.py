@@ -1,6 +1,6 @@
 import os
 
-base_path = r"C:\Users\faria\Documents\685\project\data\implicit-hate-corpus-nov-2021\implicit-hate-corpus"
+base_path = r"C:\Users\faria\PycharmProjects\685\project\data\implicit-hate-corpus-nov-2021\implicit-hate-corpus"
 
 dataset_filename = {
     # post (str)

@@ -31,8 +31,11 @@ STAGE_2_EXTRA_IMPLICIT_LABELS = {
 
 
 class Stage1Dataset(Dataset):
-    def __init__(self, annotations_file):
+    def __init__(self, annotations_file, drop_explicit_hate=False):
         self.data = pd.read_csv(annotations_file, delimiter='\t')
+
+        if drop_explicit_hate:
+            self.data = self.data.loc[self.data['class'] != 'explicit_hate']
 
         self.posts = self.data['post'].values
         self.classes = self.data['class'].values
@@ -40,8 +43,7 @@ class Stage1Dataset(Dataset):
         input_ids, attention_masks = tokenize_and_format(self.posts)
         self.input_ids = torch.cat(input_ids, dim=0)
         self.attention_masks = torch.cat(attention_masks, dim=0)
-        self.labels = torch.tensor(
-            [STAGE_1_LABELS.get(cls) for cls in self.classes])
+        self.labels = torch.tensor([STAGE_1_LABELS.get(cls) for cls in self.classes])
 
     def __len__(self):
         return len(self.data)
