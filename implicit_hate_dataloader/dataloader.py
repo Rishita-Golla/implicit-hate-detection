@@ -9,6 +9,12 @@ STAGE_1_LABELS = {
     'implicit_hate': 1,
     'not_hate': 2
 }
+
+STAGE_1_LABELS_MERGED = {
+    'not_hate': 0,
+    'hate': 1
+}
+
 STAGE_2_IMPLICIT_LABELS = {
     'white_grievance': 0,
     'incitement': 1,
@@ -31,11 +37,16 @@ STAGE_2_EXTRA_IMPLICIT_LABELS = {
 
 
 class Stage1Dataset(Dataset):
-    def __init__(self, annotations_file, drop_explicit_hate=False):
+    def __init__(self, annotations_file, drop_explicit_hate=False, merge_hate_labels=False):
         self.data = pd.read_csv(annotations_file, delimiter='\t')
 
+        label_mapping = STAGE_1_LABELS
         if drop_explicit_hate:
             self.data = self.data.loc[self.data['class'] != 'explicit_hate']
+        elif merge_hate_labels:
+            self.data.loc[(self.data['class'] == 'implicit_hate'), 'class'] = 'hate'
+            self.data.loc[(self.data['class'] == 'explicit_hate'), 'class'] = 'hate'
+            label_mapping = STAGE_1_LABELS_MERGED
 
         self.posts = self.data['post'].values
         self.classes = self.data['class'].values
@@ -43,13 +54,15 @@ class Stage1Dataset(Dataset):
         input_ids, attention_masks = tokenize_and_format(self.posts)
         self.input_ids = torch.cat(input_ids, dim=0)
         self.attention_masks = torch.cat(attention_masks, dim=0)
-        self.labels = torch.tensor([STAGE_1_LABELS.get(cls) for cls in self.classes])
+        self.labels = torch.tensor([label_mapping.get(cls) for cls in self.classes])
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
         # preprocess if required
+        # (check: does it matter if you preprocess in init instead of get_item?)
+        # https://pytorch.org/tutorials/beginner/data_loading_tutorial.html
 
         # return tokenized data
         return self.posts[idx], self.classes[idx], self.input_ids[idx], self.attention_masks[idx], self.labels[idx]

@@ -13,7 +13,6 @@ def load_into_dataframe(dataset):
 
 
 # Confirm that the GPU is detected
-
 assert torch.cuda.is_available()
 
 # Get the GPU device name.
@@ -51,6 +50,21 @@ print(Counter(classes))
 
 dataset_df = load_into_dataframe(config.dataset_filename["stage-1"])
 dataset_df = dataset_df.loc[dataset_df['class'] != 'explicit_hate']
+assert len(training_data) == len(dataset_df)
+
+# Stage 1 Annotations: see config.py for dataset specs
+training_data = Stage1Dataset(config.dataset_filename["stage-1"], merge_hate_labels=True)
+train_dataloader = DataLoader(training_data, batch_size=len(training_data), shuffle=False)
+
+# Print post and label.
+posts, classes, input_ids, attention_masks, labels = next(iter(train_dataloader))
+print('Original: ', posts[0], classes[0])
+print('Token IDs:', input_ids[0])
+print('Attention Mask IDs:', attention_masks[0])
+print('Label:', labels[0])
+print(Counter(classes))
+
+dataset_df = load_into_dataframe(config.dataset_filename["stage-1"])
 assert len(training_data) == len(dataset_df)
 
 # Stage 2 Annotations: see config.py for dataset specs
