@@ -1,0 +1,5 @@
+torch
+pandas
+pydrive
+transformers
+wandb
