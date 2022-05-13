@@ -10,6 +10,11 @@ STAGE_1_LABELS = {
     'not_hate': 2
 }
 
+STAGE_1_LABELS_EPLICIT_DROPPED = {
+    'implicit_hate': 1,
+    'not_hate': 0
+}
+
 STAGE_1_LABELS_MERGED = {
     'not_hate': 0,
     'hate': 1
@@ -37,12 +42,13 @@ STAGE_2_EXTRA_IMPLICIT_LABELS = {
 
 
 class Stage1Dataset(Dataset):
-    def __init__(self, annotations_file, drop_explicit_hate=False, merge_hate_labels=False):
+    def __init__(self, annotations_file, drop_explicit_hate=False, merge_hate_labels=False, bertweet = False):
         self.data = pd.read_csv(annotations_file, delimiter='\t')
 
         label_mapping = STAGE_1_LABELS
         if drop_explicit_hate:
             self.data = self.data.loc[self.data['class'] != 'explicit_hate']
+            label_mapping = STAGE_1_LABELS_EPLICIT_DROPPED
         elif merge_hate_labels:
             self.data.loc[(self.data['class'] == 'implicit_hate'), 'class'] = 'hate'
             self.data.loc[(self.data['class'] == 'explicit_hate'), 'class'] = 'hate'
@@ -51,7 +57,7 @@ class Stage1Dataset(Dataset):
         self.posts = self.data['post'].values
         self.classes = self.data['class'].values
 
-        input_ids, attention_masks = tokenize_and_format(self.posts)
+        input_ids, attention_masks = tokenize_and_format(self.posts, bertweet)
         self.input_ids = torch.cat(input_ids, dim=0)
         self.attention_masks = torch.cat(attention_masks, dim=0)
         self.labels = torch.tensor([label_mapping.get(cls) for cls in self.classes])
@@ -69,14 +75,16 @@ class Stage1Dataset(Dataset):
 
 
 class Stage2Dataset(Dataset):
-    def __init__(self, annotations_file):
+    def __init__(self, annotations_file, drop_other=False, bertweet = False):
         self.data = pd.read_csv(annotations_file, delimiter='\t').fillna('None')
+        if drop_other:
+            self.data = self.data.loc[self.data['implicit_class'] != 'other']
 
         self.posts = self.data['post'].values
         self.implicit_classes = self.data['implicit_class'].values
         self.extra_implicit_classes = self.data['extra_implicit_class'].values
 
-        input_ids, attention_masks = tokenize_and_format(self.posts)
+        input_ids, attention_masks = tokenize_and_format(self.posts, bertweet)
         self.input_ids = torch.cat(input_ids, dim=0)
         self.attention_masks = torch.cat(attention_masks, dim=0)
         self.implicit_labels = torch.tensor(

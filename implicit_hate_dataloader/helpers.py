@@ -3,15 +3,18 @@
 import pandas as pd
 from transformers import BertForSequenceClassification, AdamW, BertConfig
 from torch.utils.data import TensorDataset, random_split
-from transformers import BertTokenizer
+from transformers import BertTokenizer, AutoTokenizer
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 import sys
 import numpy as np
 import time
 import datetime
 
-def tokenize_and_format(sentences):
-  tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+def tokenize_and_format(sentences, bertweet = False):
+  if bertweet:
+    tokenizer = AutoTokenizer.from_pretrained('vinai/bertweet-base', use_fast=False, normalization=True)  
+  else:
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
   # Tokenize all of the sentences and map the tokens to thier word IDs.
   input_ids = []
