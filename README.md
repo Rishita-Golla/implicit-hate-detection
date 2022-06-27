@@ -76,3 +76,14 @@ Shufan
 5. evaluate on all hparam settings? or just the best model
 6. not writing model from scratch - is what we are doing sufficient.
 
+### Implicit Hate Dataset Loader:
+
+- Download the dataset from: https://www.dropbox.com/s/24meryhqi1oo0xk/implicit-hate-corpus-nov-2021.zip?dl=0
+- Requirements: pytorch, transformers, pandas
+- Reused helpers.py file from HW1 since we are working with BERT (so same tokenization strategy)
+- dataloader.py has the Pytorch Dataset class definitions
+- main.py is an example script that prints out the dataset values (as is) and the tokenized inputs and preprocessed labels (as integers) (like in HW1)
+- see config.py for dataset specs... for more info, see the readme in the original implicit hate dataset zip downloaded from dropbox
+
+
+jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8888 --NotebookApp.port_retries=0
